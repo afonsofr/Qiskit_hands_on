@@ -12180,8 +12180,9 @@ q0_1: |0>
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Example:-Gate-$X$-(bit-flip-gate)">Example: Gate $X$ (bit-flip gate)<a class="anchor-link" href="#Example:-Gate-$X$-(bit-flip-gate)">&#182;</a></h4><p>The X-gate is also known as NOT gate or “bit-flip”, since it changes a state $| 0 \rangle $ to $| 1 \rangle $ and vice versa. This is quantum analogue to a classical NOT gate.</p>
 <p>On the Bloch sphere representation, this operation corresponds to a rotation of the state around the X-axis by $\pi$ radians.</p>
-<p><img src="img/xbloch.png" width="700 px" align="center"></p>
-
+<center>
+<img src="img/xbloch.png" width="700 px">
+</center>
 </div>
 </div>
 </div></section><section>
@@ -12207,8 +12208,9 @@ $$</p>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Example:-Hadamard-gate">Example: Hadamard gate<a class="anchor-link" href="#Example:-Hadamard-gate">&#182;</a></h4><p>The Hadamard gate may be used to create superposition. It maps the basis state $| 0 \rangle$ to $| + \rangle =\frac{| 0 \rangle + | 1 \rangle }{\sqrt{2}}$, and $| 1 \rangle $ to $ | - \rangle =\frac{ |0 \rangle - |1 \rangle }{\sqrt{2}}$. <!-- On the Bloch sphere, $| + \rangle$ and $| - \rangle $ are represented by points on the X axis. When measured, these states have equal probability of becoming $| 1\rangle $ or $| 0 \rangle $, since the square modulus of the probability amplitude for each of the states has equal value. --></p>
-<p><img src="img/hbloch.png" width="700 px" align="center"></p>
-<!-- In fact, $|+\rangle $ and $| - \rangle $ are indistinguishable when measured on the computational basis. However, the states can be identified by measuring the qubit on the superposition basis, i.e. along the X-axis. A way to achieve this is by simply applying an Hadamard gate before performing the measurement, as shown in the following figure.
+<center>
+<img src="img/hbloch.png" width="700 px">
+</center><!-- In fact, $|+\rangle $ and $| - \rangle $ are indistinguishable when measured on the computational basis. However, the states can be identified by measuring the qubit on the superposition basis, i.e. along the X-axis. A way to achieve this is by simply applying an Hadamard gate before performing the measurement, as shown in the following figure.
 
 
 <img src="img/hhbloch.png" width="700 px" align="center">
@@ -12228,8 +12230,9 @@ $$</p>
 <li>$| + \rangle = \frac{1}{\sqrt{2}} | 0 \rangle + | 1 \rangle$</li>
 <li>$| - \rangle = \frac{1}{\sqrt{2}} | 0 \rangle - | 1 \rangle$</li>
 </ul>
-<p><img src="img/h_x_z.png" alt="Note: In order for images to show up in this jupyter notebook you need to select File => Trusted Notebook" width="400 px" align="center"></p>
-<p>The above diagram is a useful shorthand for quantum states conversion using quantum gates, and it also depicts the consequences of reversible computation. Literally, you can have a qubit in any of the four states $|0\rangle$, $|1\rangle$, $|-\rangle$, $|+\rangle$  and obtain any other from it by performing simple one qubit gates.</p>
+<center>
+<img src="img/h_x_z.png" alt="Note: In order for images to show up in this jupyter notebook you need to select File => Trusted Notebook" width="400 px">                                                                                           
+</center><p>The above diagram is a useful shorthand for quantum states conversion using quantum gates, and it also depicts the consequences of reversible computation. Literally, you can have a qubit in any of the four states $|0\rangle$, $|1\rangle$, $|-\rangle$, $|+\rangle$  and obtain any other from it by performing simple one qubit gates.</p>
 
 </div>
 </div>
@@ -12341,8 +12344,10 @@ $$</p>
 <li>if the control qubit is in the state $| 0 \rangle$, the target qubit is left alone;</li>
 <li>if the control qubit is in the state $| 1 \rangle$, the X gate is applied to the target qubit.</li>
 </ul>
-<p><img src="img/cnot.png" alt="Note: In order for images to show up in this jupyter notebook you need to select File => Trusted Notebook" width="200 px" align="center"></p>
-<p>This gate allows us to unlock a powerful property of quantum particles: <strong>entanglement</strong>. Without it, quantum computers would lose most of their potential advantage over the classical computing paradigm.</p>
+<p><center>
+<img src="img/cnot.png" alt="Note: In order for images to show up in this jupyter notebook you need to select File => Trusted Notebook" width="200 px">       
+</center>
+This gate allows us to unlock a powerful property of quantum particles: <strong>entanglement</strong>. Without it, quantum computers would lose most of their potential advantage over the classical computing paradigm.</p>
 <p>In quantum circuits, CNOT gates are used to entangle pairs of qubits.</p>
 
 </div>
@@ -13131,10 +13136,10 @@ Multi-Qubit Gates [Name / Type / Gate Error]
 
  
  
-<div id="e481c847-1137-4529-bfc6-8f172d88bd3f"></div>
+<div id="b0aaa667-f02d-4539-92d9-4942b9ee0f41"></div>
 <div class="output_subarea output_widget_view ">
 <script type="text/javascript">
-var element = $('#e481c847-1137-4529-bfc6-8f172d88bd3f');
+var element = $('#b0aaa667-f02d-4539-92d9-4942b9ee0f41');
 </script>
 <script type="application/vnd.jupyter.widget-view+json">
 {"model_id": "6e81357471da4fa69864b9e5e4510454", "version_major": 2, "version_minor": 0}
@@ -13292,8 +13297,9 @@ var element = $('#e481c847-1137-4529-bfc6-8f172d88bd3f');
 <li><strong>Balanced</strong>: outputs 0 for half the input value and 1 for the other half</li>
 </ul>
 <p>For the case that $n=1$ we have $f: \{0,1\} \rightarrow \{0,1\}$ that maps a single bit into either 0 or 1. If we are given a black box, an <strong>oracle</strong>, that takes as input this two bits and outputs the unknown value.</p>
-<p><img src="img/c_oracle.png" alt="Note: In order for images to show up in this jupyter notebook you need to select File => Trusted Notebook" width="400 px" align="center"></p>
-<p>To answer this question classically, we would always need two function invocations. We could do $f(0)$ and $f(1)$ and see if it is either constant or balanced.</p>
+<center>
+<img src="img/c_oracle.png" alt="Note: In order for images to show up in this jupyter notebook you need to select File => Trusted Notebook" width="400 px">
+</center><p>To answer this question classically, we would always need two function invocations. We could do $f(0)$ and $f(1)$ and see if it is either constant or balanced.</p>
 
 </div>
 </div>
@@ -13303,8 +13309,9 @@ var element = $('#e481c847-1137-4529-bfc6-8f172d88bd3f');
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Before transforming it into a quantum problem, we need our black box to be an oracle which allows for <strong>reversible computation</strong>, like so:</p>
-<p><img src="img/q_oracle.png" alt="Note: In order for images to show up in this jupyter notebook you need to select File => Trusted Notebook" width="400 px" align="center"></p>
-
+<center>
+<img src="img/q_oracle.png" alt="Note: In order for images to show up in this jupyter notebook you need to select File => Trusted Notebook" width="400 px" >
+</center>
 </div>
 </div>
 </div></section><section>
@@ -13352,8 +13359,9 @@ var element = $('#e481c847-1137-4529-bfc6-8f172d88bd3f');
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Generalizing for a function $f: \{0,1\}^n \rightarrow \{0,1\}$, a classical algorithm would need $2^{n-1}+1$ passes, while a quantum function would still require 1 pass.</p>
-<p><img src="img/q_oraclen.png" alt="Note: In order for images to show up in this jupyter notebook you need to select File => Trusted Notebook" width="500 px" align="center"></p>
-<p>Deutsch-Josza's algorithm illustrates the notion of <strong>quantum parallelism</strong>: a quantum register has the ability to exist in a superposition of base states - each one may be thought of as a single argument to a function. A function performed on the register in a superposition of states is thus performed on each of the components of the superposition, <em>while only being applied once</em>.</p>
+<center>
+<img src="img/q_oraclen.png" alt="Note: In order for images to show up in this jupyter notebook you need to select File => Trusted Notebook" width="500 px">
+</center><p>Deutsch-Josza's algorithm illustrates the notion of <strong>quantum parallelism</strong>: a quantum register has the ability to exist in a superposition of base states - each one may be thought of as a single argument to a function. A function performed on the register in a superposition of states is thus performed on each of the components of the superposition, <em>while only being applied once</em>.</p>
 
 </div>
 </div>
@@ -13367,27 +13375,21 @@ var element = $('#e481c847-1137-4529-bfc6-8f172d88bd3f');
 <span class="n">qr</span> <span class="o">=</span> <span class="n">QuantumRegister</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 <span class="n">cr</span> <span class="o">=</span> <span class="n">ClassicalRegister</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span><span class="n">cr</span><span class="p">)</span>
-
 <span class="c1"># Flip ancilla qubit to |1&gt;</span>
 <span class="n">qc</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">qr</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
-
 <span class="c1"># Apply Hadamard gate to the whole register</span>
 <span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">qr</span><span class="p">)</span>
-
 <span class="c1"># Oracle</span>
 <span class="n">qc</span><span class="o">.</span><span class="n">barrier</span><span class="p">()</span>
 <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">qr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">qr</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
 <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">qr</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">qr</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
 <span class="n">qc</span><span class="o">.</span><span class="n">barrier</span><span class="p">()</span>
-
 <span class="c1"># Return qubits to the computational basis</span>
 <span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">qr</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 <span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="n">qr</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-
 <span class="c1"># Measure</span>
 <span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">qr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">cr</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 <span class="n">qc</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">qr</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">cr</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-
 <span class="n">qc</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">)</span>
 </pre></div>
 
