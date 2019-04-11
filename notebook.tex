@@ -1,0 +1,1434 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{basics}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+     Trusted Notebook" width="500 px" align="center"\textgreater{}
+
+\section{Hands-on introduction to
+Qiskit}\label{hands-on-introduction-to-qiskit}
+
+\subsection{University of Minho}\label{university-of-minho}
+
+\subsubsection{Afonso Rodrigues and Ana
+Neri}\label{afonso-rodrigues-and-ana-neri}
+
+    \subsubsection{The "big picture"}\label{the-big-picture}
+
+ Trusted Notebook" width="1000 px" align="center"\textgreater{}
+
+     Trusted Notebook" width="1000 px" align="center"\textgreater{}
+
+    \section{Contents}\label{contents}
+
+\begin{itemize}
+\tightlist
+\item
+  Section \ref{theory}
+\item
+  Section \ref{firstqc}
+\item
+  Section \ref{aer_simulation}
+\item
+  Section \ref{ibmq_provider}
+\item
+  Section \ref{deutsch}
+\item
+  Section \ref{ignis}
+\end{itemize}
+
+    \subsection{Recall the theory}\label{recall-the-theory}
+
+    A single qubit quantum state
+
+\[|\psi\rangle = \alpha|0\rangle + \beta |1\rangle\]
+
+As a vector this is
+
+\[
+|\psi\rangle =  
+\begin{pmatrix}
+\alpha \\
+\beta
+\end{pmatrix}.
+\]
+
+Another representation is
+
+\[|\psi\rangle = \cos \left( \frac{\theta}{2} \right)|0\rangle + \sin\left( \frac{\theta}{2}\right) e^{i\phi}|1\rangle\]
+
+    \subsubsection{Bloch sphere}\label{bloch-sphere}
+
+ Trusted Notebook" width="300 px"\textgreater{}
+
+    Quantum gates/operations may be represented as matrices.
+
+The action of the quantum gate is expressed by the product of its matrix
+with the vector representing the quantum state.
+
+\[|\psi'\rangle = U|\psi\rangle\]
+
+The most general form of a single qubit unitary gate
+
+\[
+U = \begin{pmatrix}
+\cos(\theta/2) & -e^{i\lambda}\sin(\theta/2) \\
+e^{i\phi}\sin(\theta/2) & e^{i\lambda+i\phi}\cos(\theta/2) 
+\end{pmatrix}.
+\]
+
+    
+
+    \subsection{Let's start building a
+circuit}\label{lets-start-building-a-circuit}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{} Ignore warnings for the purpose of this demonstration}
+        \PY{k+kn}{import} \PY{n+nn}{warnings}
+        \PY{n}{warnings}\PY{o}{.}\PY{n}{filterwarnings}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ignore}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{} Useful additional packages }
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{from} \PY{n+nn}{math} \PY{k}{import} \PY{n}{pi}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{} Relevant QISKit modules}
+        \PY{k+kn}{from} \PY{n+nn}{qiskit} \PY{k}{import} \PY{n}{QuantumCircuit}\PY{p}{,} \PY{n}{ClassicalRegister}\PY{p}{,} \PY{n}{QuantumRegister}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{} Auxiliary functions for circuit execution}
+        \PY{k+kn}{from} \PY{n+nn}{qiskit} \PY{k}{import} \PY{n}{Aer}\PY{p}{,} \PY{n}{BasicAer}\PY{p}{,} \PY{n}{execute}
+        \PY{k+kn}{from} \PY{n+nn}{qiskit}\PY{n+nn}{.}\PY{n+nn}{tools}\PY{n+nn}{.}\PY{n+nn}{visualization} \PY{k}{import} \PY{n}{plot\PYZus{}histogram}\PY{p}{,} \PY{n}{circuit\PYZus{}drawer}
+        
+        \PY{k}{def} \PY{n+nf}{show\PYZus{}results}\PY{p}{(}\PY{n}{D}\PY{p}{)}\PY{p}{:}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{D}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n+nb}{list}\PY{p}{(}\PY{n}{D}\PY{o}{.}\PY{n}{values}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{align}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{center}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{D}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n+nb}{list}\PY{p}{(}\PY{n}{D}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+        
+        
+        \PY{c+c1}{\PYZsh{} Execute circuit, display a histogram of the results}
+        \PY{k}{def} \PY{n+nf}{execute\PYZus{}locally}\PY{p}{(}\PY{n}{qc}\PY{p}{,} \PY{n}{draw\PYZus{}circuit}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} Compile and run the Quantum circuit on a simulator backend}
+            \PY{n}{backend\PYZus{}sim} \PY{o}{=} \PY{n}{Aer}\PY{o}{.}\PY{n}{get\PYZus{}backend}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{qasm\PYZus{}simulator}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{job\PYZus{}sim} \PY{o}{=} \PY{n}{execute}\PY{p}{(}\PY{n}{qc}\PY{p}{,} \PY{n}{backend\PYZus{}sim}\PY{p}{,} \PY{n}{shots}\PY{o}{=}\PY{l+m+mi}{1000}\PY{p}{)}
+            \PY{n}{result\PYZus{}sim} \PY{o}{=} \PY{n}{job\PYZus{}sim}\PY{o}{.}\PY{n}{result}\PY{p}{(}\PY{p}{)}
+            \PY{n}{result\PYZus{}counts} \PY{o}{=} \PY{n}{result\PYZus{}sim}\PY{o}{.}\PY{n}{get\PYZus{}counts}\PY{p}{(}\PY{n}{qc}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} Print the results}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Simulation: }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{result\PYZus{}counts}\PY{p}{)}
+            
+            \PY{k}{if} \PY{n}{draw\PYZus{}circuit}\PY{p}{:} \PY{c+c1}{\PYZsh{} draw the circuit}
+                \PY{n}{qc}\PY{o}{.}\PY{n}{draw}\PY{p}{(}\PY{p}{)}
+            \PY{k}{else}\PY{p}{:} \PY{c+c1}{\PYZsh{} or show the results}
+                \PY{n}{show\PYZus{}results}\PY{p}{(}\PY{n}{result\PYZus{}counts}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} Create registers}
+        \PY{n}{qr0} \PY{o}{=} \PY{n}{QuantumRegister}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} you only need the classical register if you want to do measurement!}
+        \PY{n}{cr0} \PY{o}{=} \PY{n}{ClassicalRegister}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Create quantum circuit}
+        \PY{n}{qc} \PY{o}{=} \PY{n}{QuantumCircuit}\PY{p}{(}\PY{n}{qr0}\PY{p}{,} \PY{n}{cr0}\PY{p}{)}
+        
+        \PY{n}{qc}\PY{o}{.}\PY{n}{draw}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:} <qiskit.tools.visualization.\_text.TextDrawing at 0x27cb012b320>
+\end{Verbatim}
+            
+    \paragraph{Circuits are the primary unit of computation in
+Terra!}\label{circuits-are-the-primary-unit-of-computation-in-terra}
+
+Circuits contain:
+
+\begin{itemize}
+\tightlist
+\item
+  name - for referencing the circuit later
+\item
+  data - list of gates in the circuit
+\item
+  registers - quantum and classical registers
+\end{itemize}
+
+They do \textbf{not} contain information about possible backends.
+
+    \section{Gates}\label{gates}
+
+    Although the basic gate set of IBM Q devices is
+\[\{id, u1, u2, u3, cx\}\] QISKit supports many gates. (check the
+\href{https://github.com/Qiskit/qiskit-tutorials/blob/master/qiskit/terra/summary_of_quantum_operations.ipynb}{Summary
+of quantum operations} in the tutorials of terra)
+
+    \paragraph{\texorpdfstring{Example: Gate \(X\) (bit-flip
+gate)}{Example: Gate X (bit-flip gate)}}\label{example-gate-x-bit-flip-gate}
+
+The X-gate is also known as NOT gate or ``bit-flip'', since it changes a
+state \$\textbar{} 0 \rangle \$ to \$\textbar{} 1 \rangle \$ and vice
+versa. This is quantum analogue to a classical NOT gate.
+
+On the Bloch sphere representation, this operation corresponds to a
+rotation of the state around the X-axis by \(\pi\) radians.
+
+    \paragraph{\texorpdfstring{Example: \(Z\) (phase-flip
+gate)}{Example: Z (phase-flip gate)}}\label{example-z-phase-flip-gate}
+
+The phase flip gate \(Z\) is defined as:
+
+\[
+Z = 
+\begin{pmatrix}
+1 & 0\\
+0 & -1
+\end{pmatrix}
+\]
+
+It leaves the basis state \$\textbar{}0 \rangle \$ unchanged, while
+mapping \(| 1 \rangle\) to \$- \textbar{} 1 \rangle \$. In the Bloch
+sphere representation, and similarly to the \(X\) gate, it rotates the
+state around the \(Z\) axis by \(\pi\) radians.
+
+    \paragraph{Example: Hadamard gate}\label{example-hadamard-gate}
+
+The Hadamard gate may be used to create superposition. It maps the basis
+state \(| 0 \rangle\) to
+\(| + \rangle =\frac{| 0 \rangle + | 1 \rangle }{\sqrt{2}}\), and
+\$\textbar{} 1 \rangle \$ to \$ \textbar{} -
+\rangle =\frac{ |0 \rangle - |1 \rangle }{\sqrt{2}}\$.
+
+The Hadamard gate, along with the X, Y and Z gates, is self-inverse:
+\(H.H = I\).
+
+    \subsection{Computational and superposition
+basis}\label{computational-and-superposition-basis}
+
+Any set of orthogonal states spanning all dimensions of the Hilbert
+space of the quantum state can be used as a basis. The Hadamard gate may
+be used to easily change between the computational (\(| 0 \rangle\) and
+\(|1 \rangle\)) and the superpositon basis, where:
+
+\begin{itemize}
+\tightlist
+\item
+  \(| + \rangle = \frac{1}{\sqrt{2}} | 0 \rangle + | 1 \rangle\)
+\item
+  \(| - \rangle = \frac{1}{\sqrt{2}} | 0 \rangle - | 1 \rangle\)
+\end{itemize}
+
+ Trusted Notebook" width="400 px"\textgreater{}
+
+The above diagram is a useful shorthand for quantum states conversion
+using quantum gates, and it also depicts the consequences of reversible
+computation. Literally, you can have a qubit in any of the four states
+\(|0\rangle\), \(|1\rangle\), \(|-\rangle\), \(|+\rangle\) and obtain
+any other from it by performing simple one qubit gates.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{qr} \PY{o}{=} \PY{n}{QuantumRegister}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
+        \PY{n}{cr} \PY{o}{=} \PY{n}{ClassicalRegister}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
+        \PY{n}{qc\PYZus{}basis} \PY{o}{=} \PY{n}{QuantumCircuit}\PY{p}{(}\PY{n}{qr}\PY{p}{,} \PY{n}{cr}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} An X gate in the computational basis}
+        \PY{n}{qc\PYZus{}basis}\PY{o}{.}\PY{n}{x}\PY{p}{(}\PY{n}{qr}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} Is equivalent to a Z gate in the superposition basis}
+        \PY{n}{qc\PYZus{}basis}\PY{o}{.}\PY{n}{h}\PY{p}{(}\PY{n}{qr}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+        \PY{n}{qc\PYZus{}basis}\PY{o}{.}\PY{n}{z}\PY{p}{(}\PY{n}{qr}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+        \PY{n}{qc\PYZus{}basis}\PY{o}{.}\PY{n}{h}\PY{p}{(}\PY{n}{qr}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} What happens when we apply the Z gate without changing basis?}
+        \PY{n}{qc\PYZus{}basis}\PY{o}{.}\PY{n}{z}\PY{p}{(}\PY{n}{qr}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} Measure qubits into classical register}
+        \PY{n}{qc\PYZus{}basis}\PY{o}{.}\PY{n}{measure}\PY{p}{(}\PY{n}{qr}\PY{p}{,}\PY{n}{cr}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} Draw the quantum circuits}
+        \PY{n}{qc\PYZus{}basis}\PY{o}{.}\PY{n}{draw}\PY{p}{(}\PY{n}{output}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mpl}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+\texttt{\color{outcolor}Out[{\color{outcolor}6}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_22_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{execute\PYZus{}locally}\PY{p}{(}\PY{n}{qc\PYZus{}basis}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Simulation: 
+
+ \{'011': 1000\}
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_23_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{CNOT and other multi-qubit
+operations}\label{cnot-and-other-multi-qubit-operations}
+
+No set of quantum gates containing only single qubit operations can ever
+be universal (i.e. form a basis to perform any quantum operation on a
+multi-qubit quantum system).
+
+The CNOT gate, also known as controlled-X, is the fundamental two-qubit
+gate. Together with a generalized single-qubit unitary gate, we are able
+to decompose \textbf{any} multi-qubit operation. The CNOT gate takes one
+qubit as control, and one qubit as target.
+
+\begin{itemize}
+\tightlist
+\item
+  if the control qubit is in the state \(| 0 \rangle\), the target qubit
+  is left alone;
+\item
+  if the control qubit is in the state \(| 1 \rangle\), the X gate is
+  applied to the target qubit.
+\end{itemize}
+
+ Trusted Notebook" width="200 px"\textgreater{}
+
+This gate allows us to unlock a powerful property of quantum particles:
+\textbf{entanglement}. Without it, quantum computers would lose most of
+their potential advantage over the classical computing paradigm.
+
+In quantum circuits, CNOT gates are used to entangle pairs of qubits.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{qr} \PY{o}{=} \PY{n}{QuantumRegister}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}
+        \PY{n}{cr} \PY{o}{=} \PY{n}{ClassicalRegister}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}
+        
+        \PY{n}{qc\PYZus{}multi\PYZus{}qubit} \PY{o}{=} \PY{n}{QuantumCircuit}\PY{p}{(}\PY{n}{qr}\PY{p}{,} \PY{n}{cr}\PY{p}{)}
+        
+        \PY{n}{qc\PYZus{}multi\PYZus{}qubit}\PY{o}{.}\PY{n}{h}\PY{p}{(}\PY{n}{qr}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+        \PY{n}{qc\PYZus{}multi\PYZus{}qubit}\PY{o}{.}\PY{n}{cx}\PY{p}{(}\PY{n}{qr}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{qr}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+        
+        \PY{n}{qc\PYZus{}multi\PYZus{}qubit}\PY{o}{.}\PY{n}{measure}\PY{p}{(}\PY{n}{qr}\PY{p}{,}\PY{n}{cr}\PY{p}{)}
+        
+        \PY{n}{qc\PYZus{}multi\PYZus{}qubit}\PY{o}{.}\PY{n}{draw}\PY{p}{(}\PY{n}{output}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mpl}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+\texttt{\color{outcolor}Out[{\color{outcolor}8}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_25_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{execute\PYZus{}locally}\PY{p}{(}\PY{n}{qc\PYZus{}multi\PYZus{}qubit}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Simulation: 
+
+ \{'00': 508, '11': 492\}
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Other commonly mentioned multi-qubit gates (which can be decomposed into
+CNOT's):
+
+\begin{itemize}
+\item
+  The SWAP gate, which exchanges the state of two qubits;
+\item
+  The Tofolli gate, also known as CCNOT.
+\end{itemize}
+
+    
+
+    \section{Simulating circuits with Qiskit
+Aer}\label{simulating-circuits-with-qiskit-aer}
+
+    In version 0.7 Aer was rename to BasicAer .
+
+Aer will be used to fancier and larger packages.
+
+    \paragraph{Aer vs BasicAer}\label{aer-vs-basicaer}
+
+\begin{itemize}
+\item
+  BasicAer: Terra's built-in suite of pure-python simulators
+\item
+  Aer: Qiskit's suite of high-performance simulators (faster and with
+  noise sophisticated models - aer.noise)
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{k+kn}{from} \PY{n+nn}{qiskit} \PY{k}{import} \PY{n}{BasicAer}\PY{p}{,} \PY{n}{execute}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{BasicAer}\PY{o}{.}\PY{n}{backends}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:} [<QasmSimulatorPy('qasm\_simulator') from BasicAer()>,
+          <StatevectorSimulatorPy('statevector\_simulator') from BasicAer()>,
+          <UnitarySimulatorPy('unitary\_simulator') from BasicAer()>]
+\end{Verbatim}
+            
+    \paragraph{Simulators}\label{simulators}
+
+\begin{itemize}
+\tightlist
+\item
+  statevector\_simulator : This is the qasm\_simulator with a snapshot
+  at the end
+
+  Returns result object containing a dictionary of basis states with
+  complex amplitudes for each
+\item
+  unitary\_simulator : Returns a matrix of your circuit!
+\item
+  ibmq\_qasm\_simulator : a public simulator on an HPC machine run by
+  IBM (Note, this is under the IBMQ provider)
+\end{itemize}
+
+    \subsubsection{Statevector\_simulator}\label{statevector_simulator}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{qc\PYZus{}superposition} \PY{o}{=} \PY{n}{QuantumCircuit}\PY{p}{(}\PY{n}{qr}\PY{p}{,}\PY{n}{cr}\PY{p}{)}
+         \PY{n}{qc\PYZus{}superposition}\PY{o}{.}\PY{n}{h}\PY{p}{(}\PY{n}{qr}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+         \PY{n}{qc\PYZus{}superposition}\PY{o}{.}\PY{n}{measure}\PY{p}{(}\PY{n}{qr}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{cr}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+         \PY{n}{qc\PYZus{}superposition}\PY{o}{.}\PY{n}{draw}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:} <qiskit.tools.visualization.\_text.TextDrawing at 0x27cb012b160>
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{backend} \PY{o}{=} \PY{n}{BasicAer}\PY{o}{.}\PY{n}{get\PYZus{}backend}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{statevector\PYZus{}simulator}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Import plotting tools}
+         \PY{k+kn}{from} \PY{n+nn}{qiskit}\PY{n+nn}{.}\PY{n+nn}{tools}\PY{n+nn}{.}\PY{n+nn}{visualization} \PY{k}{import} \PY{n}{plot\PYZus{}bloch\PYZus{}multivector}\PY{p}{,} \PY{n}{plot\PYZus{}state\PYZus{}city}
+         
+         \PY{c+c1}{\PYZsh{} Plot the Bloch sphere of the qubit state after performing the Hadamard gate}
+         \PY{n}{result\PYZus{}h} \PY{o}{=} \PY{n}{execute}\PY{p}{(}\PY{n}{qc\PYZus{}superposition}\PY{p}{,} \PY{n}{backend}\PY{p}{)}\PY{o}{.}\PY{n}{result}\PY{p}{(}\PY{p}{)}
+         \PY{n}{bloch\PYZus{}h}\PY{o}{=} \PY{n}{result\PYZus{}h}\PY{o}{.}\PY{n}{get\PYZus{}statevector}\PY{p}{(}\PY{n}{qc\PYZus{}superposition}\PY{p}{)}
+         \PY{n}{plot\PYZus{}bloch\PYZus{}multivector}\PY{p}{(}\PY{n}{bloch\PYZus{}h}\PY{p}{)}
+\end{Verbatim}
+
+\texttt{\color{outcolor}Out[{\color{outcolor}14}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_37_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{} Plot the Bloch sphere of the qubit state after creating entanglement}
+         \PY{n}{result\PYZus{}bell} \PY{o}{=} \PY{n}{execute}\PY{p}{(}\PY{n}{qc\PYZus{}multi\PYZus{}qubit}\PY{p}{,} \PY{n}{backend}\PY{p}{)}\PY{o}{.}\PY{n}{result}\PY{p}{(}\PY{p}{)}
+         \PY{n}{bell}\PY{o}{=} \PY{n}{result\PYZus{}bell}\PY{o}{.}\PY{n}{get\PYZus{}statevector}\PY{p}{(}\PY{n}{qc\PYZus{}multi\PYZus{}qubit}\PY{p}{)}
+         \PY{n}{plot\PYZus{}bloch\PYZus{}multivector}\PY{p}{(}\PY{n}{bell}\PY{p}{)}
+\end{Verbatim}
+
+\texttt{\color{outcolor}Out[{\color{outcolor}15}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_38_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{plot\PYZus{}state\PYZus{}city}\PY{p}{(}\PY{n}{bell}\PY{p}{)}
+\end{Verbatim}
+
+\texttt{\color{outcolor}Out[{\color{outcolor}16}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_39_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    \subsubsection{qasm\_simulator}\label{qasm_simulator}
+
+    To run the circuit you need to add measurement gates!
+
+Note: it is always a good ideia to add barrier before the measurement
+gates!
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{qc}\PY{o}{.}\PY{n}{measure}\PY{p}{(}\PY{n}{qr0}\PY{p}{,} \PY{n}{cr0}\PY{p}{)}
+         \PY{n}{qc}\PY{o}{.}\PY{n}{draw}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}12}]:} <qiskit.tools.visualization.\_text.TextDrawing at 0x27cb077b0f0>
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{qr} \PY{o}{=} \PY{n}{QuantumRegister}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
+         \PY{n}{cr} \PY{o}{=} \PY{n}{ClassicalRegister}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
+         \PY{n}{qc\PYZus{}toffoli} \PY{o}{=} \PY{n}{QuantumCircuit}\PY{p}{(}\PY{n}{qr}\PY{p}{,}\PY{n}{cr}\PY{p}{)}
+         \PY{n}{qc\PYZus{}toffoli}\PY{o}{.}\PY{n}{h}\PY{p}{(}\PY{n}{qr}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+         \PY{n}{qc\PYZus{}toffoli}\PY{o}{.}\PY{n}{x}\PY{p}{(}\PY{n}{qr}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+         \PY{n}{qc\PYZus{}toffoli}\PY{o}{.}\PY{n}{ccx}\PY{p}{(}\PY{n}{qr}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{qr}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{qr}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+         \PY{n}{qc\PYZus{}toffoli}\PY{o}{.}\PY{n}{measure}\PY{p}{(}\PY{n}{qr}\PY{p}{,}\PY{n}{cr}\PY{p}{)}
+         
+         \PY{n}{qc\PYZus{}toffoli}\PY{o}{.}\PY{n}{draw}\PY{p}{(}\PY{n}{output}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mpl}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+\texttt{\color{outcolor}Out[{\color{outcolor}17}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_43_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{backend} \PY{o}{=} \PY{n}{BasicAer}\PY{o}{.}\PY{n}{get\PYZus{}backend}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{qasm\PYZus{}simulator}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n}{shots} \PY{o}{=} \PY{l+m+mi}{1024}
+         \PY{n}{job\PYZus{}bell} \PY{o}{=} \PY{n}{execute}\PY{p}{(}\PY{n}{qc\PYZus{}toffoli}\PY{p}{,} \PY{n}{backend}\PY{p}{,} \PY{n}{shots}\PY{o}{=}\PY{n}{shots}\PY{p}{)}
+         
+         \PY{k+kn}{from} \PY{n+nn}{qiskit}\PY{n+nn}{.}\PY{n+nn}{tools}\PY{n+nn}{.}\PY{n+nn}{visualization} \PY{k}{import} \PY{n}{plot\PYZus{}histogram}
+         
+         \PY{n}{result\PYZus{}bell} \PY{o}{=} \PY{n}{job\PYZus{}bell}\PY{o}{.}\PY{n}{result}\PY{p}{(}\PY{p}{)}
+         \PY{n}{counts\PYZus{}bell} \PY{o}{=} \PY{n}{result\PYZus{}bell}\PY{o}{.}\PY{n}{get\PYZus{}counts}\PY{p}{(}\PY{n}{qc\PYZus{}toffoli}\PY{p}{)}
+         \PY{n}{plot\PYZus{}histogram}\PY{p}{(}\PY{n}{counts\PYZus{}bell}\PY{p}{)}
+\end{Verbatim}
+
+\texttt{\color{outcolor}Out[{\color{outcolor}18}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_44_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    
+
+    \section{IBM Q Provider: Running in quantum
+devices}\label{ibm-q-provider-running-in-quantum-devices}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{k+kn}{from} \PY{n+nn}{qiskit} \PY{k}{import} \PY{n}{IBMQ}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{k+kn}{import} \PY{n+nn}{sys}
+         \PY{c+c1}{\PYZsh{}path to your Qconfig file}
+         \PY{n}{sys}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{insert}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{..}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{..}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{k+kn}{import} \PY{n+nn}{Qconfig\PYZus{}IBM\PYZus{}experience}
+         \PY{k+kn}{import} \PY{n+nn}{Qconfig\PYZus{}IBM\PYZus{}network}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{c+c1}{\PYZsh{} Or you can use:}
+         \PY{n}{IBMQ}\PY{o}{.}\PY{n}{enable\PYZus{}account}\PY{p}{(}\PY{n}{Qconfig\PYZus{}IBM\PYZus{}experience}\PY{o}{.}\PY{n}{APItoken}\PY{p}{)}
+         \PY{n}{IBMQ}\PY{o}{.}\PY{n}{enable\PYZus{}account}\PY{p}{(}\PY{n}{Qconfig\PYZus{}IBM\PYZus{}network}\PY{o}{.}\PY{n}{APItoken}\PY{p}{,} \PY{n}{Qconfig\PYZus{}IBM\PYZus{}network}\PY{o}{.}\PY{n}{url}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} IMBQ.load\PYZus{}account()}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Available backends:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{IBMQ}\PY{o}{.}\PY{n}{backends}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Available backends:
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}21}]:} [<IBMQBackend('ibmqx4') from IBMQ()>,
+          <IBMQBackend('ibmqx2') from IBMQ()>,
+          <IBMQBackend('ibmq\_16\_melbourne') from IBMQ()>,
+          <IBMQBackend('ibmq\_qasm\_simulator') from IBMQ()>,
+          <IBMQBackend('ibmq\_20\_tokyo') from IBMQ(ibm-q-academic, univ-minho, group-1-test)>,
+          <IBMQBackend('ibmq\_qasm\_simulator') from IBMQ(ibm-q-academic, univ-minho, group-1-test)>]
+\end{Verbatim}
+            
+     Trusted Notebook" width="1000 px" align="center"\textgreater{}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{k+kn}{from} \PY{n+nn}{qiskit}\PY{n+nn}{.}\PY{n+nn}{tools}\PY{n+nn}{.}\PY{n+nn}{monitor} \PY{k}{import} \PY{n}{backend\PYZus{}overview}
+         
+         \PY{n}{backend\PYZus{}overview}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ibmq\_20\_tokyo               ibmq\_16\_melbourne            ibmqx2
+-------------               -----------------            ------
+Num. Qubits:  20            Num. Qubits:  14             Num. Qubits:  5
+Pending Jobs: 0             Pending Jobs: 0              Pending Jobs: 4
+Least busy:   True          Least busy:   False          Least busy:   False
+Operational:  True          Operational:  True           Operational:  True
+Avg. T1:      78.1          Avg. T1:      47.1           Avg. T1:      61.9
+Avg. T2:      50.2          Avg. T2:      67.8           Avg. T2:      43.7
+
+
+
+ibmqx4
+------
+Num. Qubits:  5
+Pending Jobs: 6
+Least busy:   False
+Operational:  True
+Avg. T1:      50.0
+Avg. T2:      23.6
+
+
+
+
+    \end{Verbatim}
+
+    \begin{verbatim}
+    from qiskit.tools.jupyter import *
+
+    %qiskit_backend_overview
+    
+\end{verbatim}
+
+ Trusted Notebook" width="1000 px" align="center"\textgreater{}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{k+kn}{from} \PY{n+nn}{qiskit}\PY{n+nn}{.}\PY{n+nn}{tools}\PY{n+nn}{.}\PY{n+nn}{monitor} \PY{k}{import} \PY{n}{backend\PYZus{}monitor}
+         
+         \PY{n}{backend} \PY{o}{=} \PY{n}{IBMQ}\PY{o}{.}\PY{n}{get\PYZus{}backend}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ibmq\PYZus{}20\PYZus{}tokyo}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{backend\PYZus{}monitor}\PY{p}{(}\PY{n}{backend}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ibmq\_20\_tokyo
+=============
+Configuration
+-------------
+    n\_qubits: 20
+    operational: True
+    status\_msg: active
+    pending\_jobs: 0
+    basis\_gates: ['u1', 'u2', 'u3', 'cx', 'id']
+    local: False
+    simulator: False
+    discriminators: ['linear\_discriminator', 'quadratic\_discriminator']
+    max\_shots: 8192
+    acquisition\_latency : []
+    open\_pulse: False
+    backend\_name: ibmq\_20\_tokyo
+    memory: True
+    meas\_lo\_range: [[6.090508695, 8.090508695], [6.224394221, 8.224394221], [6.098107634, 8.098107634], [6.310698823, 8.310698823], [6.16798539, 8.16798539], [6.297936311, 8.297936311], [6.156332717, 8.156332717], [6.26951458, 8.26951458], [6.20472734, 8.20472734], [6.254023964, 8.254023964], [6.114162303, 8.114162303], [6.225126594, 8.225126593999999], [6.113678533, 8.113678533], [6.310187362, 8.310187362], [6.170311462, 8.170311462], [6.281813827, 8.281813827], [6.153026031, 8.153026031], [6.250792101, 8.250792101], [6.205991134, 8.205991134], [6.243078141, 8.243078141]]
+    conditional\_latency : []
+    dt: 3.5555555555555554e-09
+    description: 20 qubit device Tokyo remapped
+    sample\_name: Qubert
+    n\_registers: 1
+    allow\_q\_object: True
+    max\_experiments: 900
+    meas\_kernels: ['boxcar']
+    u\_channel\_lo: []
+    qubit\_lo\_range: [[4.020067853254916, 6.020067853254916], [3.9032823127356444, 5.903282312735644], [3.778400764972969, 5.778400764972969], [4.093527414675141, 6.093527414675141], [4.106927902497952, 6.106927902497952], [4.142732885529881, 6.142732885529881], [4.0333730293602486, 6.0333730293602486], [3.4576121766630212, 5.457612176663021], [4.019122553888862, 6.019122553888862], [4.063966145247117, 6.063966145247117], [3.959144075065187, 5.959144075065187], [4.229471732349173, 6.229471732349173], [3.662376150352891, 5.662376150352891], [3.898149504713147, 5.898149504713147], [4.233370178300505, 6.233370178300505], [3.49057106049772, 5.49057106049772], [4.074885835087263, 6.074885835087263], [3.9848945438215395, 5.9848945438215395], [4.109582417256195, 6.109582417256195], [4.124973281219441, 6.124973281219441]]
+    defaults: \{'qubit\_freq\_est': [5.020067853254916, 4.903282312735644, 4.778400764972969, 5.093527414675141, 5.106927902497952, 5.142732885529881, 5.0333730293602486, 4.457612176663021, 5.019122553888862, 5.063966145247117, 4.959144075065187, 5.229471732349173, 4.662376150352891, 4.898149504713147, 5.233370178300505, 4.49057106049772, 5.074885835087263, 4.9848945438215395, 5.109582417256195, 5.124973281219441], 'discriminator': \{'params': \{'resample': False, 'neighborhoods': [\{'channels': 1, 'qubits': 1\}, \{'channels': 2, 'qubits': 2\}, \{'channels': 4, 'qubits': 4\}, \{'channels': 8, 'qubits': 8\}, \{'channels': 16, 'qubits': 16\}, \{'channels': 32, 'qubits': 32\}, \{'channels': 64, 'qubits': 64\}, \{'channels': 128, 'qubits': 128\}, \{'channels': 256, 'qubits': 256\}, \{'channels': 512, 'qubits': 512\}, \{'channels': 1024, 'qubits': 1024\}, \{'channels': 2048, 'qubits': 2048\}, \{'channels': 4096, 'qubits': 4096\}, \{'channels': 8192, 'qubits': 8192\}, \{'channels': 16384, 'qubits': 16384\}, \{'channels': 32768, 'qubits': 32768\}, \{'channels': 65536, 'qubits': 65536\}, \{'channels': 131072, 'qubits': 131072\}, \{'channels': 262144, 'qubits': 262144\}, \{'channels': 524288, 'qubits': 524288\}], 'cal': 'coloring'\}, 'name': 'linear\_discriminator'\}, 'meas\_freq\_est': [7.090508695, 7.224394221, 7.098107634, 7.310698823, 7.16798539, 7.297936311, 7.156332717, 7.26951458, 7.20472734, 7.254023964, 7.114162303, 7.225126594, 7.113678533, 7.310187362, 7.170311462, 7.281813827, 7.153026031, 7.250792101, 7.205991134, 7.243078141], 'meas\_kernel': \{'params': \{\}, 'name': 'boxcar'\}, 'buffer': 1\}
+    coupling\_map: [[0, 1], [0, 5], [1, 0], [1, 2], [1, 6], [1, 7], [2, 1], [2, 6], [3, 8], [3, 9], [4, 8], [4, 9], [5, 0], [5, 6], [5, 10], [5, 11], [6, 1], [6, 2], [6, 5], [6, 7], [6, 10], [6, 11], [7, 1], [7, 6], [7, 8], [7, 12], [8, 3], [8, 4], [8, 7], [8, 9], [8, 12], [8, 13], [9, 3], [9, 4], [9, 8], [10, 5], [10, 6], [10, 11], [10, 15], [11, 5], [11, 6], [11, 10], [11, 12], [11, 16], [11, 17], [12, 7], [12, 8], [12, 11], [12, 13], [12, 16], [13, 8], [13, 12], [13, 14], [13, 18], [13, 19], [14, 13], [14, 18], [14, 19], [15, 10], [15, 16], [16, 11], [16, 12], [16, 15], [16, 17], [17, 11], [17, 16], [17, 18], [18, 13], [18, 14], [18, 17], [19, 13], [19, 14]]
+    rep\_times: [50, 500, 1000]
+    online\_date: 2018-05-10T04:00:00+00:00
+    hamiltonian: \{'osc': \{\}, 'vars': \{\}, 'h\_latex': '', 'h\_str': ['']\}
+    credits\_required: True
+    url: None
+    meas\_map: [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]]
+    backend\_version: 1.1.1
+    dtm: 3.5555555555555554e-09
+    conditional: False
+    meas\_levels: [1, 2]
+    n\_uchannels: 0
+
+Qubits [Name / Freq / T1 / T2 / U1 err / U2 err / U3 err / Readout err]
+-----------------------------------------------------------------------
+    Q0 / 5.02007 GHz / 93.15814 µs / 49.05352 µs / 0.0 / 0.00149 / 0.00298 / 0.036
+    Q1 / 4.90328 GHz / 112.20103 µs / 62.2219 µs / 0.0 / 0.00096 / 0.00193 / 0.032
+    Q2 / 4.7784 GHz / 96.11126 µs / 32.07219 µs / 0.0 / 0.00513 / 0.01026 / 0.116
+    Q3 / 5.09353 GHz / 71.16254 µs / 46.5135 µs / 0.0 / 0.00557 / 0.01113 / 0.042
+    Q4 / 5.10693 GHz / 87.27105 µs / 31.68539 µs / 0.0 / 0.00274 / 0.00549 / 0.058
+    Q5 / 5.14273 GHz / 38.68349 µs / 41.10991 µs / 0.0 / 0.0015 / 0.00299 / 0.047
+    Q6 / 5.03337 GHz / 92.55877 µs / 55.9486 µs / 0.0 / 0.00069 / 0.00137 / 0.027
+    Q7 / 4.45761 GHz / 97.24442 µs / 85.25766 µs / 0.0 / 0.00152 / 0.00304 / 0.095
+    Q8 / 5.01912 GHz / 50.32156 µs / 54.67645 µs / 0.0 / 0.00176 / 0.00352 / 0.057
+    Q9 / 5.06397 GHz / 56.69019 µs / 22.9287 µs / 0.0 / 0.00152 / 0.00304 / 0.068
+    Q10 / 4.95914 GHz / 79.61066 µs / 50.00389 µs / 0.0 / 0.00244 / 0.00488 / 0.036
+    Q11 / 5.22947 GHz / 71.11991 µs / 46.09277 µs / 0.0 / 0.00195 / 0.00389 / 0.039
+    Q12 / 4.66238 GHz / 57.23069 µs / 71.62781 µs / 0.0 / 0.00122 / 0.00245 / 0.233
+    Q13 / 4.89815 GHz / 120.08645 µs / 60.03407 µs / 0.0 / 0.00189 / 0.00379 / 0.032
+    Q14 / 5.23337 GHz / 58.76288 µs / 51.3598 µs / 0.0 / 0.00176 / 0.00352 / 0.043
+    Q15 / 4.49057 GHz / 79.48357 µs / 59.57375 µs / 0.0 / 0.00109 / 0.00219 / 0.094
+    Q16 / 5.07489 GHz / 44.30495 µs / 45.86736 µs / 0.0 / 0.00115 / 0.00231 / 0.098
+    Q17 / 4.98489 GHz / 102.97572 µs / 51.61594 µs / 0.0 / 0.00102 / 0.00204 / 0.086
+    Q18 / 5.10958 GHz / 68.96818 µs / 60.45859 µs / 0.0 / 0.00401 / 0.00802 / 0.069
+    Q19 / 5.12497 GHz / 83.89641 µs / 25.66835 µs / 0.0 / 0.00196 / 0.00392 / 0.037
+
+Multi-Qubit Gates [Name / Type / Gate Error]
+--------------------------------------------
+    CX0\_1 / cx / 0.01906
+    CX0\_5 / cx / 0.02487
+    CX1\_0 / cx / 0.01906
+    CX1\_2 / cx / 0.02098
+    CX1\_6 / cx / 0.01641
+    CX1\_7 / cx / 0.03495
+    CX2\_1 / cx / 0.02098
+    CX2\_6 / cx / 0.03442
+    CX3\_8 / cx / 0.03237
+    CX3\_9 / cx / 0.069
+    CX4\_8 / cx / 0.02745
+    CX4\_9 / cx / 0.04903
+    CX5\_0 / cx / 0.02487
+    CX5\_6 / cx / 0.02357
+    CX5\_10 / cx / 0.03547
+    CX5\_11 / cx / 0.02928
+    CX6\_1 / cx / 0.01641
+    CX6\_2 / cx / 0.03442
+    CX6\_5 / cx / 0.02357
+    CX6\_7 / cx / 0.03827
+    CX6\_10 / cx / 0.0182
+    CX6\_11 / cx / 0.02262
+    CX7\_1 / cx / 0.03495
+    CX7\_6 / cx / 0.03827
+    CX7\_8 / cx / 0.04924
+    CX7\_12 / cx / 0.02218
+    CX8\_3 / cx / 0.03237
+    CX8\_4 / cx / 0.02745
+    CX8\_7 / cx / 0.04924
+    CX8\_9 / cx / 0.02937
+    CX8\_12 / cx / 0.03818
+    CX8\_13 / cx / 0.02489
+    CX9\_3 / cx / 0.069
+    CX9\_4 / cx / 0.04903
+    CX9\_8 / cx / 0.02937
+    CX10\_5 / cx / 0.03547
+    CX10\_6 / cx / 0.0182
+    CX10\_11 / cx / 0.03193
+    CX10\_15 / cx / 0.03683
+    CX11\_5 / cx / 0.02928
+    CX11\_6 / cx / 0.02262
+    CX11\_10 / cx / 0.03193
+    CX11\_12 / cx / 0.03385
+    CX11\_16 / cx / 0.02298
+    CX11\_17 / cx / 0.03279
+    CX12\_7 / cx / 0.02218
+    CX12\_8 / cx / 0.03818
+    CX12\_11 / cx / 0.03385
+    CX12\_13 / cx / 0.02193
+    CX12\_16 / cx / 0.03848
+    CX13\_8 / cx / 0.02489
+    CX13\_12 / cx / 0.02193
+    CX13\_14 / cx / 0.0322
+    CX13\_18 / cx / 0.03487
+    CX13\_19 / cx / 0.02401
+    CX14\_13 / cx / 0.0322
+    CX14\_18 / cx / 0.02191
+    CX14\_19 / cx / 0.02163
+    CX15\_10 / cx / 0.03683
+    CX15\_16 / cx / 0.04181
+    CX16\_11 / cx / 0.02298
+    CX16\_12 / cx / 0.03848
+    CX16\_15 / cx / 0.04181
+    CX16\_17 / cx / 0.021
+    CX17\_11 / cx / 0.03279
+    CX17\_16 / cx / 0.021
+    CX17\_18 / cx / 0.02505
+    CX18\_13 / cx / 0.03487
+    CX18\_14 / cx / 0.02191
+    CX18\_17 / cx / 0.02505
+    CX19\_13 / cx / 0.02401
+    CX19\_14 / cx / 0.02163
+
+    \end{Verbatim}
+
+    \begin{verbatim}
+    from qiskit.tools.jupyter import *
+
+    %qiskit_backend_monitor
+    
+\end{verbatim}
+
+ Trusted Notebook" width="1000 px" align="center"\textgreater{}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{shots} \PY{o}{=} \PY{l+m+mi}{1024}       \PY{c+c1}{\PYZsh{} Number of shots to run the program (experiment); maximum is 8192 shots.}
+         \PY{n}{job\PYZus{}exp} \PY{o}{=} \PY{n}{execute}\PY{p}{(}\PY{n}{qc\PYZus{}toffoli}\PY{p}{,} \PY{n}{backend}\PY{p}{,} \PY{n}{shots} \PY{o}{=} \PY{n}{shots}\PY{p}{)}
+         
+         \PY{k+kn}{from} \PY{n+nn}{qiskit}\PY{n+nn}{.}\PY{n+nn}{tools}\PY{n+nn}{.}\PY{n+nn}{monitor} \PY{k}{import} \PY{n}{job\PYZus{}monitor}
+         
+         \PY{n}{job\PYZus{}monitor}\PY{p}{(}\PY{n}{job\PYZus{}exp}\PY{p}{,} \PY{n}{interval}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+HTML(value="<p style='font-size:16px;'>Job Status: job is being initialized </p>")
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{c+c1}{\PYZsh{} job\PYZus{}id allows you to retrive old jobs}
+         \PY{n}{jobID} \PY{o}{=} \PY{n}{job\PYZus{}exp}\PY{o}{.}\PY{n}{job\PYZus{}id}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{JOB ID: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{jobID}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{job\PYZus{}get}\PY{o}{=}\PY{n}{backend}\PY{o}{.}\PY{n}{retrieve\PYZus{}job}\PY{p}{(}\PY{n}{jobID}\PY{p}{)}
+         \PY{n}{job\PYZus{}get}\PY{o}{.}\PY{n}{result}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{get\PYZus{}counts}\PY{p}{(}\PY{n}{qc\PYZus{}toffoli}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+JOB ID: 5ca34a07709d0f0051c6423d
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}25}]:} \{'000': 84,
+          '001': 28,
+          '010': 440,
+          '011': 135,
+          '100': 16,
+          '101': 28,
+          '110': 52,
+          '111': 241\}
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{c+c1}{\PYZsh{} We recommend increasing the timeout to 30 minutes to avoid timeout errors when the queue is long.}
+         \PY{n}{result\PYZus{}real} \PY{o}{=} \PY{n}{job\PYZus{}exp}\PY{o}{.}\PY{n}{result}\PY{p}{(}\PY{n}{timeout}\PY{o}{=}\PY{l+m+mi}{3600}\PY{p}{,} \PY{n}{wait}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}
+         \PY{n}{counts} \PY{o}{=} \PY{n}{result\PYZus{}real}\PY{o}{.}\PY{n}{get\PYZus{}counts}\PY{p}{(}\PY{n}{qc\PYZus{}toffoli}\PY{p}{)}
+         \PY{n}{plot\PYZus{}histogram}\PY{p}{(}\PY{n}{counts}\PY{p}{)}
+\end{Verbatim}
+
+\texttt{\color{outcolor}Out[{\color{outcolor}26}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_57_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{title} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bell state}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{legend} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{run in real device results}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{simulation results}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         
+         \PY{n}{plot\PYZus{}histogram}\PY{p}{(}\PY{p}{[}\PY{n}{counts}\PY{p}{,} \PY{n}{counts\PYZus{}bell}\PY{p}{]}\PY{p}{,} \PY{n}{legend} \PY{o}{=} \PY{n}{legend}\PY{p}{,} \PY{n}{title}\PY{o}{=} \PY{n}{title}\PY{p}{)}
+\end{Verbatim}
+
+\texttt{\color{outcolor}Out[{\color{outcolor}27}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_58_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{k+kn}{from} \PY{n+nn}{qiskit} \PY{k}{import} \PY{n+nb}{compile}
+         \PY{k+kn}{from} \PY{n+nn}{qiskit}\PY{n+nn}{.}\PY{n+nn}{converters} \PY{k}{import} \PY{n}{qobj\PYZus{}to\PYZus{}circuits}
+         
+         \PY{n}{qobj} \PY{o}{=} \PY{n+nb}{compile}\PY{p}{(}\PY{n}{qc\PYZus{}toffoli}\PY{p}{,} \PY{n}{backend}\PY{p}{)}
+         
+         \PY{n}{qc\PYZus{}run} \PY{o}{=} \PY{n}{qobj\PYZus{}to\PYZus{}circuits}\PY{p}{(}\PY{n}{qobj}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         
+         \PY{n}{qc\PYZus{}run}\PY{o}{.}\PY{n}{draw}\PY{p}{(}\PY{n}{output}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mpl}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+\texttt{\color{outcolor}Out[{\color{outcolor}30}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_59_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    
+
+    \section{Deutsch-Josza Algorithm}\label{deutsch-josza-algorithm}
+
+    \subsubsection{Problem formulation}\label{problem-formulation}
+
+Consider a function \(f: \{0,1\}^n \rightarrow \{0,1\}\) that maps an
+array of \(n\) bits into either 0 or 1. We do not know the logic behind
+it. We know that it is either constant or balanced: - \textbf{Constant}:
+its output is always 0 or always 1 - \textbf{Balanced}: outputs 0 for
+half the input value and 1 for the other half
+
+For the case that \(n=1\) we have \(f: \{0,1\} \rightarrow \{0,1\}\)
+that maps a single bit into either 0 or 1. If we are given a black box,
+an \textbf{oracle}, that takes as input this two bits and outputs the
+unknown value.
+
+ Trusted Notebook" width="400 px"\textgreater{}
+
+To answer this question classically, we would always need two function
+invocations. We could do \(f(0)\) and \(f(1)\) and see if it is either
+constant or balanced.
+
+    Before transforming it into a quantum problem, we need our black box to
+be an oracle which allows for \textbf{reversible computation}, like so:
+
+ Trusted Notebook" width="400 px" \textgreater{}
+
+    \subsubsection{Algorithm}\label{algorithm}
+
+Let us imagine the following procedure: - We begin with two qubits, q0
+in state \(|0\rangle\) and q1 in state \(|1\rangle\) (\(|01\rangle\)).
+
+\begin{itemize}
+\item
+  We apply a Hadamard to each qubit, the result is
+  \(\frac{1}{2}(|00\rangle - |01\rangle + |10\rangle - |11\rangle)\)
+\item
+  We now call our oracle, which maps \(|ab\rangle\) or
+  \(|a\rangle |b\rangle\) (easier to interpret) into
+  \(|a\rangle |b \oplus f(a)\rangle\) the result is:
+\end{itemize}
+
+\[\frac{1}{2}( \; |0\rangle |0\oplus f(0)\rangle - |0\rangle |1\oplus f(0)\rangle + |1\rangle |0\oplus f(1)\rangle - |1 \rangle |1\oplus f(1)\rangle \;)\]
+
+    We can now use the following equivalence:
+
+\[|0 \oplus a\rangle - |1 \oplus a\rangle =  (-1)^a(|0\rangle - |1\rangle)\]
+
+To replace above and get:
+
+\[\frac{1}{2}(|0\rangle \; [(-1)^{f(0)}(|0\rangle - |1\rangle)]\; +\; |1\rangle \;[(-1)^{f(1)}(|0\rangle - |1\rangle)])\]
+
+This quantum state can be separated into the product state:
+
+\[ [\frac{1}{\sqrt{2}} (-1)^{f(0)} | 0 \rangle + \frac{1}{\sqrt{2}} (-1)^{f(1)}| 1 \rangle] \; \otimes \; [\frac{1}{\sqrt{2}} | 0 \rangle - \frac{1}{\sqrt{2}} | 1 \rangle] \]
+
+Our second qubit can be ignored, and what remains is our first qubit,
+which contains both \(f(0)\) and \(f(1)\) - both images of \(f\) with a
+single pass over the oracle. This can further be simplified as:
+
+\[(-1)^{f(0)}(\frac{1}{\sqrt{2}} | 0 \rangle + \frac{1}{\sqrt{2}} (-1)^{f(0) \oplus f(1)} | 1 \rangle)\]
+
+Lastly, we apply a Hadamard gate on our qubit and we arrive at:
+
+\[(-1)^{f(0)} |f(0) \oplus f(1)\rangle\]
+
+What is the meaning of this? - if f is constant (\(00\) or \(11\))
+\(\rightarrow\) output is \(0\) (xor is 0) - if f is balanced (\(01\) or
+\(10\)) \(\rightarrow\) output is \(\pm 1\) (xor is 1)
+
+Which, in fact, means that we can do a \emph{single pass} over the
+oracle gate discover whether it is constant or balanced, an impossible
+feat in classical computing.
+
+    Generalizing for a function \(f: \{0,1\}^n \rightarrow \{0,1\}\), a
+classical algorithm would need \(2^{n-1}+1\) passes, while a quantum
+function would still require 1 pass.
+
+ Trusted Notebook" width="500 px"\textgreater{}
+
+Deutsch-Josza's algorithm illustrates the notion of \textbf{quantum
+parallelism}: a quantum register has the ability to exist in a
+superposition of base states - each one may be thought of as a single
+argument to a function. A function performed on the register in a
+superposition of states is thus performed on each of the components of
+the superposition, \emph{while only being applied once}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{c+c1}{\PYZsh{} Create a quantum circuit with 3 qubits and 2 bits}
+         \PY{n}{qr} \PY{o}{=} \PY{n}{QuantumRegister}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
+         \PY{n}{cr} \PY{o}{=} \PY{n}{ClassicalRegister}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{qc} \PY{o}{=} \PY{n}{QuantumCircuit}\PY{p}{(}\PY{n}{qr}\PY{p}{,}\PY{n}{cr}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Flip ancilla qubit to |1\PYZgt{}}
+         \PY{n}{qc}\PY{o}{.}\PY{n}{x}\PY{p}{(}\PY{n}{qr}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Apply Hadamard gate to the whole register}
+         \PY{n}{qc}\PY{o}{.}\PY{n}{h}\PY{p}{(}\PY{n}{qr}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Oracle}
+         \PY{n}{qc}\PY{o}{.}\PY{n}{barrier}\PY{p}{(}\PY{p}{)}
+         \PY{n}{qc}\PY{o}{.}\PY{n}{cx}\PY{p}{(}\PY{n}{qr}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{qr}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+         \PY{n}{qc}\PY{o}{.}\PY{n}{cx}\PY{p}{(}\PY{n}{qr}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{qr}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+         \PY{n}{qc}\PY{o}{.}\PY{n}{barrier}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Return qubits to the computational basis}
+         \PY{n}{qc}\PY{o}{.}\PY{n}{h}\PY{p}{(}\PY{n}{qr}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+         \PY{n}{qc}\PY{o}{.}\PY{n}{h}\PY{p}{(}\PY{n}{qr}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Measure}
+         \PY{n}{qc}\PY{o}{.}\PY{n}{measure}\PY{p}{(}\PY{n}{qr}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{cr}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+         \PY{n}{qc}\PY{o}{.}\PY{n}{measure}\PY{p}{(}\PY{n}{qr}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{cr}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+         \PY{n}{qc}\PY{o}{.}\PY{n}{draw}\PY{p}{(}\PY{n}{output}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mpl}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+\texttt{\color{outcolor}Out[{\color{outcolor}26}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_67_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{backend} \PY{o}{=} \PY{n}{BasicAer}\PY{o}{.}\PY{n}{get\PYZus{}backend}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{qasm\PYZus{}simulator}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n}{shots} \PY{o}{=} \PY{l+m+mi}{1024}
+         \PY{n}{job\PYZus{}DJ\PYZus{}s} \PY{o}{=} \PY{n}{execute}\PY{p}{(}\PY{n}{qc}\PY{p}{,} \PY{n}{backend}\PY{p}{,} \PY{n}{shots}\PY{o}{=}\PY{n}{shots}\PY{p}{)}
+         
+         \PY{n}{result\PYZus{}DJ\PYZus{}s} \PY{o}{=} \PY{n}{job\PYZus{}DJ\PYZus{}s}\PY{o}{.}\PY{n}{result}\PY{p}{(}\PY{p}{)}
+         \PY{n}{counts\PYZus{}DJ\PYZus{}sim} \PY{o}{=} \PY{n}{result\PYZus{}DJ\PYZus{}s}\PY{o}{.}\PY{n}{get\PYZus{}counts}\PY{p}{(}\PY{n}{qc}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{backend} \PY{o}{=} \PY{n}{IBMQ}\PY{o}{.}\PY{n}{get\PYZus{}backend}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ibmq\PYZus{}20\PYZus{}tokyo}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{shots} \PY{o}{=} \PY{l+m+mi}{1024}
+         \PY{n}{job\PYZus{}DJ\PYZus{}r} \PY{o}{=} \PY{n}{execute}\PY{p}{(}\PY{n}{qc}\PY{p}{,} \PY{n}{backend}\PY{p}{,} \PY{n}{shots}\PY{o}{=}\PY{n}{shots}\PY{p}{)}
+         
+         \PY{n}{jobID\PYZus{}DJ\PYZus{}r} \PY{o}{=} \PY{n}{job\PYZus{}DJ\PYZus{}r}\PY{o}{.}\PY{n}{job\PYZus{}id}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{JOB ID: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{jobID\PYZus{}DJ\PYZus{}r}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+JOB ID: 5c9e46bb54ca3d0062df21cb
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n}{job\PYZus{}get}\PY{o}{=}\PY{n}{backend}\PY{o}{.}\PY{n}{retrieve\PYZus{}job}\PY{p}{(}\PY{n}{jobID\PYZus{}DJ\PYZus{}r}\PY{p}{)}
+         \PY{n}{result\PYZus{}DJ\PYZus{}r} \PY{o}{=} \PY{n}{job\PYZus{}get}\PY{o}{.}\PY{n}{result}\PY{p}{(}\PY{p}{)}
+         \PY{n}{counts\PYZus{}DJ\PYZus{}run} \PY{o}{=} \PY{n}{result\PYZus{}DJ\PYZus{}r}\PY{o}{.}\PY{n}{get\PYZus{}counts}\PY{p}{(}\PY{n}{qc}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{plot\PYZus{}histogram}\PY{p}{(}\PY{p}{[}\PY{n}{counts\PYZus{}DJ\PYZus{}run}\PY{p}{,} \PY{n}{counts\PYZus{}DJ\PYZus{}sim} \PY{p}{]}\PY{p}{,} \PY{n}{legend}\PY{o}{=}\PY{p}{[} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{run in real device}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ideal}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+\texttt{\color{outcolor}Out[{\color{outcolor}30}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_71_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    
+
+    \section{Ignis}\label{ignis}
+
+ Trusted Notebook" width="1000 px" align="center"\textgreater{}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{k+kn}{from} \PY{n+nn}{qiskit}\PY{n+nn}{.}\PY{n+nn}{ignis}\PY{n+nn}{.}\PY{n+nn}{mitigation}\PY{n+nn}{.}\PY{n+nn}{measurement} \PY{k}{import} \PY{p}{(} \PY{n}{complete\PYZus{}meas\PYZus{}cal}\PY{p}{,} \PY{n}{CompleteMeasFitter}\PY{p}{,} \PY{n}{MeasurementFilter} \PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{c+c1}{\PYZsh{} Generate the calibration circuits}
+         \PY{n}{qr} \PY{o}{=} \PY{n}{QuantumRegister}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
+         \PY{n}{meas\PYZus{}calibs}\PY{p}{,} \PY{n}{state\PYZus{}labels} \PY{o}{=} \PY{n}{complete\PYZus{}meas\PYZus{}cal}\PY{p}{(}\PY{n}{qubit\PYZus{}list}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{qr}\PY{o}{=}\PY{n}{qr}\PY{p}{,} \PY{n}{circlabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mcal}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{state\PYZus{}labels}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}33}]:} ['00', '01', '10', '11']
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n}{job\PYZus{}ignis} \PY{o}{=} \PY{n}{execute}\PY{p}{(}\PY{n}{meas\PYZus{}calibs}\PY{p}{,} \PY{n}{backend}\PY{o}{=}\PY{n}{backend}\PY{p}{,} \PY{n}{shots}\PY{o}{=}\PY{l+m+mi}{1000}\PY{p}{)}
+         \PY{n}{cal\PYZus{}results} \PY{o}{=} \PY{n}{job\PYZus{}ignis}\PY{o}{.}\PY{n}{result}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{c+c1}{\PYZsh{} The calibration matrix without noise is the identity matrix}
+         \PY{n}{meas\PYZus{}fitter} \PY{o}{=} \PY{n}{CompleteMeasFitter}\PY{p}{(}\PY{n}{cal\PYZus{}results}\PY{p}{,} \PY{n}{state\PYZus{}labels}\PY{p}{,} \PY{n}{circlabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mcal}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{meas\PYZus{}fitter}\PY{o}{.}\PY{n}{cal\PYZus{}matrix}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[0.967 0.122 0.055 0.015]
+ [0.015 0.86  0.001 0.04 ]
+ [0.016 0.003 0.934 0.153]
+ [0.002 0.015 0.01  0.792]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{c+c1}{\PYZsh{} Plot the calibration matrix}
+         \PY{n}{meas\PYZus{}fitter}\PY{o}{.}\PY{n}{plot\PYZus{}calibration}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_79_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \paragraph{The fidelity of the target in the original and the adapted
+circuit}\label{the-fidelity-of-the-target-in-the-original-and-the-adapted-circuit}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{c+c1}{\PYZsh{} What is the measurement fidelity?}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Average Measurement Fidelity: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{meas\PYZus{}fitter}\PY{o}{.}\PY{n}{readout\PYZus{}fidelity}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} What is the measurement fidelity of Q0? \PYZhy{} target of the adapted circuit}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Average Measurement Fidelity of Q0: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{meas\PYZus{}fitter}\PY{o}{.}\PY{n}{readout\PYZus{}fidelity}\PY{p}{(}
+             \PY{n}{label\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{00}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{01}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{10}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{11}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} What is the measurement fidelity of Q1? \PYZhy{} target of the original circuit}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Average Measurement Fidelity of Q1: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{meas\PYZus{}fitter}\PY{o}{.}\PY{n}{readout\PYZus{}fidelity}\PY{p}{(}
+             \PY{n}{label\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{00}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{10}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{01}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{11}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Average Measurement Fidelity: 0.888250
+Average Measurement Fidelity of Q0: 0.963250
+Average Measurement Fidelity of Q1: 0.919750
+
+    \end{Verbatim}
+
+    \paragraph{Applying Calibration}\label{applying-calibration}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{c+c1}{\PYZsh{} Get the filter object}
+         \PY{n}{meas\PYZus{}filter} \PY{o}{=} \PY{n}{meas\PYZus{}fitter}\PY{o}{.}\PY{n}{filter}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{c+c1}{\PYZsh{} Results of X3 with mitigation}
+         \PY{n}{mitigated\PYZus{}results} \PY{o}{=} \PY{n}{meas\PYZus{}filter}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{result\PYZus{}DJ\PYZus{}r}\PY{p}{)}
+         \PY{n}{mitigated\PYZus{}counts} \PY{o}{=} \PY{n}{mitigated\PYZus{}results}\PY{o}{.}\PY{n}{get\PYZus{}counts}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{n}{plot\PYZus{}histogram}\PY{p}{(}\PY{p}{[}\PY{n}{counts\PYZus{}DJ\PYZus{}sim}\PY{p}{,} \PY{n}{counts\PYZus{}DJ\PYZus{}run}\PY{p}{,} \PY{n}{mitigated\PYZus{}counts}\PY{p}{]}\PY{p}{,} \PY{n}{legend}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ideal}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{raw}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mitigated}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+\texttt{\color{outcolor}Out[{\color{outcolor}40}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_85_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
